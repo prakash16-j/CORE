@@ -1,4 +1,4 @@
-import React from 'react';
+import { HiClock, HiBell, HiPencil } from "react-icons/hi";
 
 const Header = () => {
     return (
@@ -10,14 +10,14 @@ const Header = () => {
                     MST
                 </div>
                 <div className="flex items-center gap-2 bg-gray-50 px-3 py-1 rounded-lg border border-gray-200">
-                    <span className="text-xs">🕒</span>
+                    <HiClock className="text-gray-400" />
                     <span className="text-sm font-medium text-gray-700">02:03:02</span>
                 </div>
-                <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200">
-                    📝
+                <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200 text-gray-500">
+                    <HiPencil />
                 </button>
-                <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200">
-                    🔔
+                <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors border border-gray-200 text-gray-500">
+                    <HiBell />
                 </button>
                 <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200 shadow-sm cursor-pointer ml-2">
                     <img

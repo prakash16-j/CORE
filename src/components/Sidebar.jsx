@@ -1,14 +1,14 @@
-import React from 'react';
+import { HiHome, HiUser, HiUserGroup, HiUserAdd, HiCog, HiChevronRight, HiChevronDoubleLeft, HiDocumentReport, HiFolderOpen } from "react-icons/hi";
 
 const Sidebar = () => {
     const menuItems = [
-        { name: 'Home', icon: '🏠' },
-        { name: 'My Info', icon: '👤', hasArrow: true },
-        { name: 'People', icon: '👥', active: true },
-        { name: 'Team Management', icon: '🤝', hasArrow: true },
-        { name: 'Project Setup', icon: '📂', hasArrow: true },
-        { name: 'Hiring', icon: '🎯' },
-        { name: 'Report', icon: '📊' },
+        { name: 'Home', icon: <HiHome /> },
+        { name: 'My Info', icon: <HiUser />, hasArrow: true },
+        { name: 'People', icon: <HiUserGroup />, active: true },
+        { name: 'Team Management', icon: <HiUserGroup />, hasArrow: true },
+        { name: 'Project Setup', icon: <HiFolderOpen />, hasArrow: true },
+        { name: 'Hiring', icon: <HiUserAdd /> },
+        { name: 'Report', icon: <HiDocumentReport /> },
     ];
 
     return (
@@ -26,8 +26,8 @@ const Sidebar = () => {
                             }}
                         />
                     </div>
-                    <button className="text-white/40 hover:text-white transition-colors">
-                        «
+                    <button className="flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 text-white/40 hover:text-white hover:bg-white/5 transition-all">
+                        <HiChevronDoubleLeft className="text-xl" />
                     </button>
                 </div>
 
@@ -45,8 +45,8 @@ const Sidebar = () => {
                                 <span className="text-sm">{item.name}</span>
                             </div>
                             {item.hasArrow && (
-                                <span className={`text-xs ${item.active ? 'text-brand-dark' : 'text-white/30'}`}>
-                                    ▶
+                                <span className={`text-base ${item.active ? 'text-brand-dark' : 'text-white/30'}`}>
+                                    <HiChevronRight />
                                 </span>
                             )}
                         </div>
@@ -56,7 +56,7 @@ const Sidebar = () => {
 
             <div className="mt-auto">
                 <div className="flex items-center gap-4 p-3 hover:bg-white/5 hover:text-white rounded-xl cursor-pointer transition-all">
-                    <span className="text-xl leading-none">⚙️</span>
+                    <span className="text-xl leading-none"><HiCog /></span>
                     <span className="text-sm">Settings</span>
                 </div>
             </div>
