@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import FilterBar from './components/FilterBar';
@@ -5,6 +6,8 @@ import PersonCard from './components/PersonCard';
 import { HiChevronLeft, HiChevronRight, HiChevronDown } from "react-icons/hi";
 
 function App() {
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
   const people = [
     { id: 1, name: 'Ethan Lee', role: 'IT Specialist', roleColor: '#947550', statusIcon: '/assets/icons/setting.png', image: '/assets/images/ethan.png' },
     { id: 2, name: 'Emily Baker', role: 'Marketing Manager', roleColor: '#947550', statusIcon: '/assets/icons/marketing.png', image: '/assets/images/emily.png' },
@@ -22,26 +25,36 @@ function App() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-brand-gray font-sans antialiased text-gray-900">
-      <div className="h-screen overflow-y-auto flex-shrink-0">
-        <Sidebar />
+      {/* Mobile Overlay */}
+      {isMobileSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300"
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
+
+      <div className={`h-screen overflow-y-auto flex-shrink-0 transition-all duration-300 z-50 
+        ${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+        fixed lg:relative lg:translate-x-0`}>
+        <Sidebar isOpen={isMobileSidebarOpen} onClose={() => setIsMobileSidebarOpen(false)} />
       </div>
+
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
-        <Header />
+        <Header onMenuClick={() => setIsMobileSidebarOpen(true)} />
         <main className="flex-1 overflow-y-auto">
           <div className="max-w-[1600px] mx-auto pb-12">
             <FilterBar />
 
-            <div className="px-8 mt-2">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="px-4 sm:px-8 mt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 items-start">
                 {people.map((person) => (
                   <PersonCard key={person.id} person={person} />
                 ))}
               </div>
 
               {/* Pagination Section */}
-
-              <div className="flex items-center justify-start gap-10 mt-16 py-8 border-t border-gray-100 font-medium text-gray-800">
-                <div className="flex items-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-10 mt-16 py-8 border-t border-gray-100 font-medium text-gray-800">
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
                   <div className="flex items-center gap-3">
                     <span className="text-sm font-normal text-gray-500">Rows per page:</span>
                     <div className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-all shadow-sm">
@@ -49,7 +62,6 @@ function App() {
                       <HiChevronDown className="text-gray-400" />
                     </div>
                   </div>
-
                   <span className="text-sm font-normal text-gray-500">1-100 of 500</span>
                 </div>
 

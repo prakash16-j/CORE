@@ -1,6 +1,6 @@
 import { HiHome, HiUser, HiUserGroup, HiUserAdd, HiCog, HiChevronRight, HiChevronDoubleLeft, HiDocumentReport, HiFolderOpen } from "react-icons/hi";
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
     const menuItems = [
         { name: 'Home', icon: <HiHome /> },
         { name: 'My Info', icon: <HiUser />, hasArrow: true },
@@ -12,7 +12,7 @@ const Sidebar = () => {
     ];
 
     return (
-        <aside className="w-72 bg-brand-dark min-h-screen p-6 flex flex-col justify-between text-white/60">
+        <aside className="w-72 bg-brand-dark h-screen p-6 flex flex-col justify-between text-white/60 shadow-2xl lg:shadow-none">
             <div>
                 <div className="flex items-center justify-between mb-12">
                     <div className="h-10 flex-shrink-0">
@@ -26,7 +26,13 @@ const Sidebar = () => {
                             }}
                         />
                     </div>
-                    <button className="flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 text-white/40 hover:text-white hover:bg-white/5 transition-all">
+                    <button
+                        onClick={onClose}
+                        className="flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 text-white/40 hover:text-white hover:bg-white/5 transition-all lg:hidden"
+                    >
+                        <HiChevronDoubleLeft className="text-xl" />
+                    </button>
+                    <button className="hidden lg:flex items-center justify-center w-10 h-10 rounded-lg border border-white/10 text-white/40 hover:text-white hover:bg-white/5 transition-all">
                         <HiChevronDoubleLeft className="text-xl" />
                     </button>
                 </div>
